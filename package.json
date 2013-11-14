@@ -1,0 +1,24 @@
+{
+  "name": "nodedoc",
+  "version": "0.0.0",
+  "description": "Command line access to the node api docs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:stefaneng/nodedoc.git"
+  },
+  "keywords": [
+    "docs",
+    "doc",
+    "search",
+    "help"
+  ],
+  "author": "Stefan Eng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefaneng/nodedoc/issues"
+  }
+}

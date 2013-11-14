@@ -1,3 +1,3 @@
 # Node Docs
 
-Access the API docs from the command line from http://nodejs.org/api/
+Command line search of the node api docs located at http://nodejs.org/api/
