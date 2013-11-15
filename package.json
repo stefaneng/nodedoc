@@ -2,7 +2,13 @@
   "name": "nodedoc",
   "version": "0.0.0",
   "description": "Command line access to the node api docs.",
-  "main": "index.js",
+  "dependencies": {
+    "request": "~2.27",
+    "commander": "2.x"
+  },
+  "devDependencies": {
+    "mocha": "~1.14"
+  },
   "scripts": {
     "test": "mocha"
   },
@@ -16,6 +22,11 @@
     "search",
     "help"
   ],
+  "preferglobal": true,
+  "main": "./lib/nodedoc.js",
+  "bin": {
+    "nodedoc": "./bin/nodedoc"
+  },
   "author": "Stefan Eng",
   "license": "MIT",
   "bugs": {
