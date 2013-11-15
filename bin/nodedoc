@@ -3,68 +3,8 @@
 "use strict";
 
 var program = require('commander'),
-    request = require('request'),
     pkg = require('../package.json'),    
-    fs = require('fs');
-
-// Node api root
-var url = "http://nodejs.org/api/";
-
-// Holds what module we are going to be accessing
-//var module;
-
-// Pretty prints the doc
-function prettyPrintFunc(obj) {
-    // match the function, put into the array
-    var re = /(.+)\((.*)\)/;
-    var match = obj.textRaw.match(re);
-    
-    var functionName = match[1];    
-    var args = match[2].split(',');
-
-    // Print it in a better way later.
-    console.log('Function: ' + functionName);
-    for(var i = 0; i < args.length; i++) {
-	// Print out arguments with whitespace stripped
-	console.log("Argument " + i + ": " + args[i].replace(/\s+/g, ''));
-    }
-}
-
-// finds a function in the arr of objects
-function findFunction(arr, name) {
-    for(var i = 0; i < arr.length; i++) {
-	console.log(arr[i].name);
-	if(arr[i].name == name) {	    
-	    return arr[i];
-	    //prettyPrintFunc(arr[i]);
-	}	
-    }
-    // Did not find function
-    return null;
-}
-
-// Access the module and return function we are looking for
-function getDocs(module, func) {
-    // Send a request to the api docs
-    request(url + module + '.json', function(err, res, data) {
-	// Request went fine
-	if(!err && res.statusCode == 200) {
-	    var json = JSON.parse(data);
-	    // find the function in the object
-//	    console.log(json.modules[0].methods);
-	    var funcObj = findFunction(json.modules[0].methods, func);
-//	    console.log(func);
-	    // if we found the object, pretty print it)
-	    if (funcObj) {
-		prettyPrintFunc(funcObj);
-	    } else {
-		console.error('Could not find function.');
-	    }
-	} else {
-	    throw err;
-	}
-    });
-}
+    nodedoc = require('../lib/nodedoc');
 
 // Get the package version
 program.version(pkg.version);
@@ -81,8 +21,7 @@ program
 program
     .command('*')
     .description('<Module>.[<Class>.]<function>')
-    .action(function(arg) {
-	
+    .action(function(arg) {	
 	arg = arg.toLowerCase();	
 	var splitArg = arg.split('.');	
 	if(splitArg.length == 2) {
@@ -90,7 +29,7 @@ program
 	    var module = splitArg[0];
 	    var func = splitArg[1];
 	    // get the docs we are looking for
-	    getDocs(module, func);
+	    nodedoc.getDocs(module, func);
 	}
 	
     });
