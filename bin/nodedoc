@@ -22,7 +22,7 @@ program
     .command('*')
     .description('<Module>.[<Class>.]<function>')
     .action(function(arg) {	
-	arg = arg.toLowerCase();	
+	//arg = arg.toLowerCase();	
 	var splitArg = arg.split('.');	
 	if(splitArg.length == 2) {
 	    // put the first argument as the module
